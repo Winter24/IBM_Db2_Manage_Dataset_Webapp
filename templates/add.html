@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sinh viên Mới</title>
+    <style>
+        body {
+            background-image: url('https://cdn.vectorstock.com/i/1000v/96/64/colorful-orange-curve-background-design-vector-31539664.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .table.table-striped {
+            background-color: rgb(233, 233, 233);
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Thêm Sinh viên Mới</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('add_student') }}">
+            <div class="form-group">
+                <label for="TEN_SINH_VIEN">Tên Sinh Viên</label>
+                <input type="text" class="form-control" id="TEN_SINH_VIEN" name="TEN_SINH_VIEN" required>
+            </div>
+            <div class="form-group">
+                <label for="NGAY_SINH">Ngày Sinh</label>
+                <input type="date" class="form-control" id="NGAY_SINH" name="NGAY_SINH" required>
+            </div>
+            <div class="form-group">
+                <label for="MA_SV">Mã SV</label>
+                <input type="text" class="form-control" id="MA_SV" name="MA_SV" required>
+            </div>
+            <div class="form-group">
+                <label for="CHUYEN_NGANH">Chuyên Ngành</label>
+                <input type="text" class="form-control" id="CHUYEN_NGANH" name="CHUYEN_NGANH" required>
+            </div>
+            <button type="submit" class="btn btn-success">Thêm Sinh viên</button>
+            <a href="{{ url_for('home') }}" class="btn btn-secondary">Hủy</a>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

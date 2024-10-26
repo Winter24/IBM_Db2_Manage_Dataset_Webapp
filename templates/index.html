@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Sinh viên</title>
+    <style>
+        body {
+            background-image: url('https://cdn.vectorstock.com/i/1000v/96/64/colorful-orange-curve-background-design-vector-31539664.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .table.table-striped {
+            background-color: rgb(233, 233, 233); 
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Danh Sách Sinh Viên</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <a href="{{ url_for('add_student') }}" class="btn btn-success btn-lg">Thêm Sinh viên Mới</a>
+        <br>
+        <br>
+        {%   if students %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Họ tên</th>
+                        <th>Ngày Sinh</th>
+                        <th>MSSV</th>
+                        <th>Chuyên Ngành</th>
+                        <th>Sửa/Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.TEN_SINH_VIEN }}</td>
+                            <td>{{ student.NGAY_SINH }}</td>
+                            <td>{{ student.MA_SV }}</td>
+                            <td>{{ student.CHUYEN_NGANH }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_student', ma_sv=student.MA_SV) }}" class="btn btn-info">Sửa</a>
+                                <form action="{{ url_for('delete_student', ma_sv=student.MA_SV) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?');">Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Không tìm thấy sinh viên nào.</p>
+        {% endif %}
+    </div>
+
+    <!-- Kommunicate Chat Widget -->
+    <script type="text/javascript">
+        (function(d, m){
+            var kommunicateSettings = 
+                {"appId":"","popupWidget":true,"automaticChatOpenOnNavigation":true};
+            var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+            window.kommunicate = m; m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
