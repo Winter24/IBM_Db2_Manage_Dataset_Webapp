@@ -16,11 +16,13 @@ The project integrates Flask, IBM DB2, and Flask-WTF for form handling.
 <h1 align="center">=========================</h1>
 
 <h2>Installation</h2>
-Dependencies
-- Python 3.8+
-- Flask
-- IBM DB
-- Flask-WTF
+Dependencies:
+
+  - Python 3.8+
+  - Flask
+  - IBM DB2
+  - IBM Watson Chatbot + Kommunicate
+  - Flask-WTF
 <h1 align="center">=========================</h1>
 
 <h2>Usage</h2>
